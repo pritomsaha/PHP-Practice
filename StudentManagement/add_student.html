@@ -1,0 +1,92 @@
+<div id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+
+    <div class="modal-header">
+      <span class="close">×</span>
+       <h4> Add Student</h4>
+    </div>
+    <div class="modal-body">
+      <form name="registerForm" role="form" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" name="name" id="name" placeholder="Enter name">
+              <span id="nameStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+              <label for="name">Roll</label>
+              <input type="number" class="form-control" name="roll" id="roll" placeholder="Enter Roll">
+              <span id="rollStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+              <label for="classes">Class</label>
+              <?php
+
+                $classList=$db->query("select * from classes");
+
+                $select= '<select name="classes" id="classes" class="form-control">';
+                while($rs=$classList->fetch_array(MYSQLI_ASSOC)){
+                      $select.='<option value="'.$rs['id'].'">'.$rs['name'].'</option>';
+                  }
+                $select.='</select>';
+                echo $select;
+          ?> 
+              <span id="classStatus" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="name">Address</label>
+              <input type="text" class="form-control" name="address" id="address" placeholder="Enter Address">
+              <span id="addressStatus" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="name">Phone number</label>
+              <input type="text" class="form-control" name="phone_number" id="phone_number" placeholder="Enter Phone number">
+              <span id="phone_numberStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="text" class="form-control" name="email" id="email" placeholder="Enter email">
+              <span id="emailStatus" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+            <label for="Student">Entry Date: </label>
+                
+                  <div class='input-group date' id='datetimepicker1' style="width: 30%">
+                      <input  class="form-control" name="startDate" id="startDate"  type="text"/>
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                  </div>
+            
+            </div>
+            <div class="form-group">
+              <label for="file">Picture</label>
+              <input type="file" name="file" />
+              
+              <span id="pictureStatus" class="text-danger"></span>
+            </div>
+
+            <button type="submit" name="add" class="btn btn-default btn-primary btn-block">Add</button>
+</form>
+    </div>
+    <div class="modal-footer">
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  
+
+  $(document).ready(function(){
+        var date_input=$('#datetimepicker1'); //our date input has the name "date"
+        date_input.datepicker({
+            format: 'dd/mm/yy',
+            autoclose: true,
+            orientation: 'bottom' 
+        });
+    });
+
+</script>
